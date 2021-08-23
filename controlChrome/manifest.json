@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "SocketLikePython",
+  "version": "1.0.0",
+  "description": "Chrome SocketLikePython",
+  "author": "Little Ghost",
+  "browser_action": {
+      "default_popup": "./lib/js/popup.html"
+  },
+  "background": {
+      "page": "./lib/js/background.html"
+  },
+  "content_scripts": [
+      {
+          "matches": [
+              "<all_urls>"
+          ],
+          "js": [
+            "./lib/js/jquery.min.js",
+            "./lib/js/operate.js",
+            "./lib/js/content-script.js"
+          ],
+          "run_at": "document_start"
+      }
+  ],
+  "permissions": [
+      "contextMenus",
+      "tabs",
+      "notifications",
+      "webRequest",
+      "webRequestBlocking",
+      "storage",
+      "http://*/*",
+      "https://*/*"
+  ]
+}

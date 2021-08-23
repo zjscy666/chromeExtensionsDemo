@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Socket.IO Page</title>
+</head>
+
+<body>
+  <input id="SendInput" autocomplete="off" />
+  <button id="SendInputevent">Send input event</button>
+  <button id="SendClickevent">Send click event</button>
+  <button id="SendGetTextevent">Send getText event</button>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+
+  var form = document.getElementById('form');
+  var input = document.getElementById('input');
+
+  document.getElementById('SendClickevent').addEventListener('click', function (e) {
+    socket.emit('webviewEvent', { event: 'click', params: { delay: 300 }, element: '#su', operateTabIndex: 0 });
+  })
+  document.getElementById('SendInputevent').addEventListener('click', function (e) {
+    const value = document.getElementById('SendInput').value;
+    socket.emit('webviewEvent', { event: 'input', params: { inputValue: value }, element: '#kw', operateTabIndex: 0 });
+  })
+  document.getElementById('SendGetTextevent').addEventListener('click', function (e) {
+    socket.emit('webviewEvent', { event: 'getElementText', params: {}, element: '.result.c-container.new-pmd .t a', operateTabIndex: 0 });
+  })
+
+  socket.on('webviewEventCallback', (msg) => {
+    console.log(msg)
+  })
+</script>
+
+</html>
